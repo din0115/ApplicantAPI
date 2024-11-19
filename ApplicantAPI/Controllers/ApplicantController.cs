@@ -104,6 +104,7 @@ namespace ApplicantAPI.Controllers
                 Comment= addApplicantDto.Comment,
                 LinkedIn= addApplicantDto.LinkedIn,
                 GitHub = addApplicantDto.GitHub,
+                CallTimeInterval = addApplicantDto.CallTimeInterval,
 
             };
             dbContext.Applicants.Add(apllicantEntity);
@@ -134,6 +135,7 @@ namespace ApplicantAPI.Controllers
             applicant.Comment = addApplicantDto.Comment;
             applicant.LinkedIn = addApplicantDto.LinkedIn;
             applicant.GitHub = addApplicantDto.GitHub;
+            applicant.CallTimeInterval = addApplicantDto.CallTimeInterval;
             dbContext.SaveChanges();
             return Ok("Your Data has been updated successfull.");
         }
