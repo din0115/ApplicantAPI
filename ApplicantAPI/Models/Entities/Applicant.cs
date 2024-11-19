@@ -18,9 +18,11 @@ namespace ApplicantAPI.Models.Entities
         public required string Comment { get; set; }
         [MaxLength(100)]
         public string CallTimeInterval { get; set; }
-        [Url][MaxLength(100)]
+        [Url]
+        [MaxLength(100)]
         public string? LinkedIn { get; set; }
-        [Url][MaxLength(100)]
+        [Url]
+        [MaxLength(100)]
         public string? GitHub { get; set; }
     }
 }

@@ -37,7 +37,8 @@ namespace ApplicantAPI.Controllers
                     PhoneNumber = addApplicantDto.PhoneNumber,
                     Comment = addApplicantDto.Comment,
                     LinkedIn = addApplicantDto.LinkedIn,
-                    GitHub = addApplicantDto.GitHub
+                    GitHub = addApplicantDto.GitHub,
+                    CallTimeInterval = addApplicantDto.CallTimeInterval
                 };
 
                 dbContext.Applicants.Add(applicantEntity);
@@ -62,6 +63,7 @@ namespace ApplicantAPI.Controllers
                 applicant.Comment = addApplicantDto.Comment;
                 applicant.LinkedIn = addApplicantDto.LinkedIn;
                 applicant.GitHub = addApplicantDto.GitHub;
+                applicant.CallTimeInterval = addApplicantDto.CallTimeInterval;
 
                 dbContext.SaveChanges();
 
