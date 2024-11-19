@@ -22,12 +22,11 @@ namespace ApplicantAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Validate the DTO
+                return BadRequest(ModelState); 
             }
 
             if (id == null || id == 0)
             {
-                // Add new applicant
                 var applicantEntity = new Applicant
                 {
                     FirstName = addApplicantDto.FirstName,
@@ -48,7 +47,6 @@ namespace ApplicantAPI.Controllers
             }
             else
             {
-                // Update existing applicant
                 var applicant = dbContext.Applicants.Find(id);
                 if (applicant == null)
                 {
@@ -88,59 +86,7 @@ namespace ApplicantAPI.Controllers
             }
             return Ok(applicant);
         }
-        [HttpPost]
-        public IActionResult AddApplicant(AddApplicantDto addApplicantDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var apllicantEntity = new Applicant()
-            {
-                FirstName= addApplicantDto.FirstName,
-                MiddleName= addApplicantDto.MiddleName,
-                LastName= addApplicantDto.LastName,
-                Email= addApplicantDto.Email,
-                PhoneNumber= addApplicantDto.PhoneNumber,
-                Comment= addApplicantDto.Comment,
-                LinkedIn= addApplicantDto.LinkedIn,
-                GitHub = addApplicantDto.GitHub,
-                CallTimeInterval = addApplicantDto.CallTimeInterval,
-
-            };
-            dbContext.Applicants.Add(apllicantEntity);
-            dbContext.SaveChanges();
-            return Ok("Your Data has been added successfull!");
-        }
-        [HttpPut]
-        [Route("{id}")]
-        public IActionResult UpdateApplicant(int id, AddApplicantDto addApplicantDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState); 
-            }
-
-            var applicant = dbContext.Applicants.Find(id);
-            if (applicant == null)
-            {
-                return NotFound("This Id Doesn't Exist");
-            }
-
-
-            applicant.FirstName = addApplicantDto.FirstName;
-            applicant.MiddleName = addApplicantDto.MiddleName;
-            applicant.LastName = addApplicantDto.LastName;
-            applicant.Email = addApplicantDto.Email;
-            applicant.PhoneNumber = addApplicantDto.PhoneNumber;
-            applicant.Comment = addApplicantDto.Comment;
-            applicant.LinkedIn = addApplicantDto.LinkedIn;
-            applicant.GitHub = addApplicantDto.GitHub;
-            applicant.CallTimeInterval = addApplicantDto.CallTimeInterval;
-            dbContext.SaveChanges();
-            return Ok("Your Data has been updated successfull.");
-        }
+       
 
         [HttpDelete]
         [Route("{id}")]
