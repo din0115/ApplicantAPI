@@ -6,10 +6,13 @@ namespace ApplicantAPI.Models.Entities
     {
         public int Id { get; set; }
         [MaxLength(50)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "First Name can only contain alphabetic characters.")]
         public required string FirstName { get; set; }
         [MaxLength(50)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Middle Name can only contain alphabetic characters.")]
         public string MiddleName { get; set; }
         [MaxLength(50)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Last Name can only contain alphabetic characters.")]
         public required string LastName { get; set; }
         public string? PhoneNumber { get; set; }
         [Required]
@@ -24,5 +27,7 @@ namespace ApplicantAPI.Models.Entities
         [Url]
         [MaxLength(100)]
         public string? GitHub { get; set; }
+        public DateTime LogDate { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdateDate { get; set; }
     }
 }
