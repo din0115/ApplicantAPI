@@ -29,7 +29,7 @@ namespace ApplicantAPI.Controllers
             var applicant = dbContext.Applicants.Find(id);
             if (applicant == null) 
             {
-                return NotFound();
+                return NotFound("This Id Doesn't Exist");
             }
             return Ok(applicant);
         }
@@ -72,8 +72,21 @@ namespace ApplicantAPI.Controllers
             applicant.LinkedIn = addApplicantDto.LinkedIn;
             applicant.GitHub = addApplicantDto.GitHub;
             dbContext.SaveChanges();
-            return Ok("Your Data has been updated successfull!");
+            return Ok("Your Data has been updated successfull.");
         }
 
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult DelApplicantById(int id)
+        {
+            var applicant = dbContext.Applicants.Find(id);
+            if (applicant == null)
+            {
+                return NotFound("This Id Doesn't exist to delete");
+            }
+            dbContext.Applicants.Remove(applicant);
+            dbContext.SaveChanges();
+            return Ok(applicant.FirstName+ " " + applicant.MiddleName + " " + applicant.LastName + " delete successfull.");
+        }
     }
 }
