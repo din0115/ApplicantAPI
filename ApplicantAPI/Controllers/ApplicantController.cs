@@ -73,8 +73,13 @@ namespace ApplicantAPI.Controllers
         public IActionResult GetAllApplicant()
         {
             var allApplicant = dbContext.Applicants.ToList();
+            if (!allApplicant.Any())
+            {
+                return NotFound("No Data found in the database.");
+            }
             return Ok(allApplicant);
         }
+
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetApplicantById(int id)
