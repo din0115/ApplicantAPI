@@ -17,7 +17,7 @@ namespace ApplicantAPI.Controllers
             this.dbContext = dbContext;
         }
         [HttpPost]
-        [Route("AddOrUpdate")]
+        [Route("SaveUpdate")]
         public IActionResult SaveUpdateApplicant([FromBody] AddApplicantDto addApplicantDto, [FromQuery] int? id = null)
         {
             if (!ModelState.IsValid)
