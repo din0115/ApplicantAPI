@@ -16,6 +16,59 @@ namespace ApplicantAPI.Controllers
         {
             this.dbContext = dbContext;
         }
+        [HttpPost]
+        [Route("AddOrUpdate")]
+        public IActionResult SaveUpdateApplicant([FromBody] AddApplicantDto addApplicantDto, [FromQuery] int? id = null)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // Validate the DTO
+            }
+
+            if (id == null || id == 0)
+            {
+                // Add new applicant
+                var applicantEntity = new Applicant
+                {
+                    FirstName = addApplicantDto.FirstName,
+                    MiddleName = addApplicantDto.MiddleName,
+                    LastName = addApplicantDto.LastName,
+                    Email = addApplicantDto.Email,
+                    PhoneNumber = addApplicantDto.PhoneNumber,
+                    Comment = addApplicantDto.Comment,
+                    LinkedIn = addApplicantDto.LinkedIn,
+                    GitHub = addApplicantDto.GitHub
+                };
+
+                dbContext.Applicants.Add(applicantEntity);
+                dbContext.SaveChanges();
+
+                return Ok("Your Data has been added successfully!");
+            }
+            else
+            {
+                // Update existing applicant
+                var applicant = dbContext.Applicants.Find(id);
+                if (applicant == null)
+                {
+                    return NotFound("This ID doesn't exist.");
+                }
+
+                applicant.FirstName = addApplicantDto.FirstName;
+                applicant.MiddleName = addApplicantDto.MiddleName;
+                applicant.LastName = addApplicantDto.LastName;
+                applicant.Email = addApplicantDto.Email;
+                applicant.PhoneNumber = addApplicantDto.PhoneNumber;
+                applicant.Comment = addApplicantDto.Comment;
+                applicant.LinkedIn = addApplicantDto.LinkedIn;
+                applicant.GitHub = addApplicantDto.GitHub;
+
+                dbContext.SaveChanges();
+
+                return Ok("Your Data has been updated successfully.");
+            }
+        }
+
         [HttpGet]
         public IActionResult GetAllApplicant()
         {
