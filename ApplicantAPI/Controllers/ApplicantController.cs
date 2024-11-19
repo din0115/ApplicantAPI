@@ -36,6 +36,11 @@ namespace ApplicantAPI.Controllers
         [HttpPost]
         public IActionResult AddApplicant(AddApplicantDto addApplicantDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var apllicantEntity = new Applicant()
             {
                 FirstName= addApplicantDto.FirstName,
@@ -56,6 +61,11 @@ namespace ApplicantAPI.Controllers
         [Route("{id}")]
         public IActionResult UpdateApplicant(int id, AddApplicantDto addApplicantDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); 
+            }
+
             var applicant = dbContext.Applicants.Find(id);
             if (applicant == null)
             {
